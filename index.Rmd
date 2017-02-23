@@ -1,0 +1,46 @@
+---
+output:
+  html_document: default
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+#### Beaches Near New York City  (Date: 2/23/17)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+```{r message=FALSE,warning=FALSE}
+library(leaflet)
+#-- Read in beach umbrella icon
+beach_icon <- makeIcon(
+            iconUrl = "./beach.png",
+            iconWidth = 31*215/280, iconHeight = 31,
+            iconAnchorX = 31*215/280/2, iconAnchorY = 16)
+  
+#-- Create latitude and longitude data frame values
+beach_df <- data.frame(
+         lat= c(40.5720498,40.5945469,40.5834375,40.8662112,40.5714942),
+         lng= c(-73.9818054,-73.5029044,-73.6659638,-73.7934664,-73.851524),
+         col= c("blue","green","red","orange","purple"),
+         stringsAsFactors=FALSE)
+
+#-- Create pop-up values data frame
+beach_info <- c(
+"<a href='https://www.nycgovparks.org/parks/coney-island-beach-and-boardwalk'> Coney Island Beach </a>",
+"<a href='https://parks.ny.gov/parks/jonesbeach/'> Jones Beach </a>",
+"<a href='http://www.longbeachny.gov/beach'> Long Beach </a>",
+"<a href='https://www.nycgovparks.org/parks/pelham-bay-park/facilities/beaches/'> Orchard Beach </a>",
+"<a href='https://www.nycgovparks.org/parks/rockaway-beach-and-boardwalk'>Rockaway Beach </a>")
+
+beach_colors <- c("blue","green","red","orange","purple")
+
+#-- Render leaflet map with popups  
+my_map <- beach_df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon=beach_icon,popup=beach_info)
+my_map
+```
+
+
+
