@@ -1,0 +1,50 @@
+---
+title: "Data Products Wk3 Submission"
+author: "Marvin J. Rich"
+date: "February 2, 2017"
+output: ioslides_presentation
+---
+
+*****
+
+The following slide is a 3D plotly plot of the diamonds data. 
+
+A random subset is used to enhance 3D rendering speed.  
+
+The plot conveys the following attributes:  
+
+- X = clarity (IF,VVS1,VVS2,VS1,VS2,SI1,SI2,I1)
+- Y = color (D,E,F,G,H,I,J)
+- Z = price (in 1K dollers)
+- color = cut (see legend)
+- size of dot represents carats (weight)
+
+One can zoom and rotate the plot interactively. 
+
+Use the arrows to scroll forward/backwards.
+
+*****
+
+```{r echo=FALSE,fig.align='center',message=FALSE,warning=FALSE}
+library(ggplot2)
+library(plotly)
+data(diamonds)
+#-- Set seed for reproducability
+set.seed(1234)
+#-- Get 3000 random 3000 diamonds dataset entries
+#-- For speed of plot ... over 53K actual entries
+idx <- runif(3000,min=1,max=nrow(diamonds))
+#-- Now use the random subset selected
+q <- diamonds[idx,]
+#-- Perform 3D plot
+p <- plot_ly(x=q$clarity,
+        y=q$color,
+        z=q$price, 
+        type="scatter3d",color=q$cut,size=q$price,
+        mode="markers") %>%
+layout(title="Diamond Sale Attributes")
+p
+```
+
+*****
+Thanks!
