@@ -23,6 +23,8 @@ One can zoom and rotate the plot interactively.
 
 Use the arrows to scroll forward/backwards.
 
+Click pointer on slide 3 if initially blank on your browser.
+
 *****
 
 ```{r echo=FALSE,fig.align='center',message=FALSE,warning=FALSE}
